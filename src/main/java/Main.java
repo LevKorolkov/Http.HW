@@ -10,6 +10,7 @@ import java.util.List;
 
 public class Main {
     public static ObjectMapper mapper = new ObjectMapper();
+    private static final String uri = "https://raw.githubusercontent.com/netology-code/jd-homeworks/master/http/task1/cats";
 
     public static void main(String[] args) {
         CloseableHttpClient httpClient = HttpClientBuilder.create()
@@ -20,7 +21,7 @@ public class Main {
                         .build())
                 .build();
 
-        HttpGet request = new HttpGet("https://raw.githubusercontent.com/netology-code/jd-homeworks/master/http/task1/cats");
+        HttpGet request = new HttpGet(uri);
 
         try (CloseableHttpResponse response = httpClient.execute(request)) {
             List<Post> posts = mapper.readValue(response.getEntity().getContent(), new TypeReference<List<Post>>() {
